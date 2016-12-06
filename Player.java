@@ -1,25 +1,35 @@
 public class Player {
     
-    private String name;
+    private String firstName;
+    private String lastName;
     private int birthday;
     private int number;
     private int weight;
     private int height;
 
-    public Player(String name, int birthday, int number, int weight, int height) {
-	this.name = name;
+    public Player(String firstName, String lastName, int birthday, int number, int weight, int height) {
+	this.firstName = firstName;
+	this.lastName = lastName;
 	this.birthday = birthday;
 	this.number = number;
 	this.weight = weight;
 	this.height = height;
     }
 
-    public String getName() {
-	return name;
+    public String getFirstName() {
+	return firstName;
     }
 
-    public void setName(String name) {
-	this.name = name;
+    public void setFirstName(String firstName) {
+	this.firstName = firstName;
+    }
+
+    public String getLastName() {
+	return lastName;
+    }
+
+    public void setLastName(String lastName) {
+	this.lastName = lastName;
     }
 
     public int getBirthday() {

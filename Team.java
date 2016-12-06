@@ -1,5 +1,4 @@
-import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
 
 public class Team {
 
@@ -8,28 +7,48 @@ public class Team {
     private int wins;
     private int losses;
     
-    private Hashtable<String, Player> byName = new Hashtable<String, Player>();
+    private Hashtable<String, Player> byFirstName = new Hashtable<String, Player>();
+    private Hashtable<String, Player> byLastName = new Hashtable<String, Player>();
     private Hashtable<Integer, Player> byNumber = new Hashtable<Integer, Player>();
 
-    public Team(String name, String coach) {
+    public Team(String name, String coach, int wins, int losses) {
 	this.name = name;
 	this.coach = coach;
+	this.wins = wins;
+	this.losses = losses;
     }
 
     public void addPlayer(Player p) {
-	byName.put(p.getName(), p);
-	byNumber.put(p.getNumber(), p);
+	byFirstName.insertQuad(p.getFirstName(), p);
+	byLastName.insertQuad(p.getLastName(), p);
+	byNumber.insertQuad(p.getNumber(), p);
     }
 
-    public Player getByName(String s) {
-	return byName.get(s);
+    public ArrayList<Player> getByFirstName(String s) {
+	return byFirstName.getQuad(s);
     }
 
-    public Player getByNumber(int i) {
-	return byNumber.get(i);
+    public ArrayList<Player> getByLastName(String s) {
+	return byLastName.getQuad(s);
     }
 
-    public Collection<Player> getAllPlayers() {
-	return byName.values();
+    public ArrayList<Player> getByNumber(int i) {
+	return byNumber.getQuad(i);
+    }
+
+    public ArrayList<Player> getAllPlayers() {
+	return byFirstName.getAll();
+    }
+
+    public String getName() {
+	return this.name;
+    }
+
+    public String getCoach() {
+	return this.coach;
+    }
+
+    public String getRecord() {
+	return "" + wins + "-" + losses;
     }
 }

@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class Hashtable<K, V> {
 
+    // Hashnode class to be used for seperate chaining hashing
     private class Hashnode {
 	
 	public K key;
@@ -29,36 +30,50 @@ public class Hashtable<K, V> {
 	    return this.value;
 	}
     }
-    
+
+    // ArrayLists for Hashnodes. ArrayList used because
+    // of support for  generic types
     private ArrayList<Hashnode> HNArray;
     private ArrayList<K> keyArray;
     private ArrayList<V> valueArray;
     private int sizeArray;
     private int inArray;
-    private double loadFactor;
-    
+
+    // Constructor for new hashtable of size 20
     public Hashtable() {
 	keyArray = new ArrayList<K>(20);
 	valueArray = new ArrayList<V>(20);
 	HNArray = new ArrayList<Hashnode>(20);
 	sizeArray = 20;
 	inArray = 0;
-	//loadFactor = 0.75;
+	for (int i = 0; i < sizeArray; i++) {
+	    keyArray.add(null);
+	    valueArray.add(null);
+	    HNArray.add(null);
+	}
 	clear();
     }
 
+    // Constructor for new hashtable of size 'size'.
     public Hashtable(int size) {
 	keyArray = new ArrayList<K>(size);
 	valueArray = new ArrayList<V>(size);
 	HNArray = new ArrayList<Hashnode>(size);
 	sizeArray = size;
 	inArray = 0;
-	//loadFactor = 0.75;
+	for (int i = 0; i < sizeArray; i++) {
+	    keyArray.add(null);
+	    valueArray.add(null);
+	    HNArray.add(null);
+	}
 	clear();
     }
 
+    // Clears all ArrayList.
     public void clear() {
-	for (int i = 0; i < sizeArray; i++) {
+	//System.out.println(keyArray.size());
+	//System.out.println(sizeArray);
+	for (int i = 0; i < keyArray.size(); i++) {
 	    keyArray.set(i, null);
 	    valueArray.set(i, null);
 	    HNArray.set(i, null);
@@ -66,6 +81,7 @@ public class Hashtable<K, V> {
 	inArray = 0;
     }
 
+    // Insertion by separate chaining
     public void insertSepChain(K key, V value) {	 
 	Hashnode HN = new Hashnode(key, value);
 	int intKey = (Integer)key;
@@ -85,10 +101,11 @@ public class Hashtable<K, V> {
 	    ArrayList<Hashnode> tmp = new ArrayList<Hashnode>(size*2);
 	    HNArray.addAll(0, tmp);
 	    HNArray = tmp;
+        }
 	*/
-	}
     }
 
+    // Retrieval by separate chaining
     public ArrayList<V> getSepChain(K key) {
 	ArrayList<V> ret = new ArrayList<V>();
 	int intKey = (Integer)key;
@@ -103,7 +120,8 @@ public class Hashtable<K, V> {
 	    }
 	} return ret;
     }
-    
+
+    // Insertion by linear probing
     public void insertLinear(K key, V value) {
 	int intKey = (Integer)key;
 	int index = intKey % sizeArray;
@@ -125,6 +143,7 @@ public class Hashtable<K, V> {
 	*/
     }
 
+    // Retrieval by linear probling
     public ArrayList<V> getLinear(K key) {
 	ArrayList<V> ret = new ArrayList<V>();
 	int intKey = (Integer)key;
@@ -137,7 +156,8 @@ public class Hashtable<K, V> {
 	}
 	return ret;
     }
-    
+
+    // Insertion by quadratic probing
     public void insertQuad(K key, V value) {
 	int intKey = (Integer)key;
 	int index = intKey % sizeArray;
@@ -149,6 +169,7 @@ public class Hashtable<K, V> {
 	inArray++;
     }
 
+    // Retrieval by quadratic probing
     public ArrayList<V> getQuad(K key) {
 	ArrayList<V> ret = new ArrayList<V>();
 	int intKey = (Integer)key;
@@ -161,7 +182,8 @@ public class Hashtable<K, V> {
 	}
 	return ret;
     }
-    
+
+    // Insertion by double hashing
     public void insertDouble(K key, V value) {
 	int intKey = (Integer)key;
 	int index = intKey % sizeArray;
@@ -173,6 +195,7 @@ public class Hashtable<K, V> {
 	inArray++;
     }
 
+    // Retrieval by double hashing
     public ArrayList<V> getDouble(K key) {
 	ArrayList<V> ret = new ArrayList<V>();
 	int intKey = (Integer)key;
@@ -181,6 +204,17 @@ public class Hashtable<K, V> {
 	    if (keyArray.get(index) == key) {
 		ret.add(valueArray.get(index));
 		index = (intKey + (i * (7 - (intKey % 7)))) % sizeArray;
+	    }
+	}
+	return ret;
+    }
+
+    // Retrieves all the elements in the hashtable as an ArrayList
+    public ArrayList<V> getAll() {
+	ArrayList<V> ret = new ArrayList<V>();
+	for (int i = 0; i < sizeArray; i++) {
+	    if (valueArray.get(i) != null) {
+		ret.add(valueArray.get(i));
 	    }
 	}
 	return ret;

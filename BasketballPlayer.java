@@ -7,8 +7,8 @@ public class BasketballPlayer extends Player {
     private int blocks;
     private int gamesPlayed;
 
-    public BasketballPlayer(String name, int birthday, int number, int weight, int height) {
-	super(name, birthday, number, weight, height);
+    public BasketballPlayer(String firstName, String lastName, int birthday, int number, int weight, int height) {
+	super(firstName, lastName, birthday, number, weight, height);
 	points = 0;
 	rebounds = 0;
 	assists = 0;
