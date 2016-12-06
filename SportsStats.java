@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 public class SportsStats {
 
+    // Returns a users' choice from a number of options
     public static String chooser(String[] options) {
 	Scanner sc = new Scanner(System.in);
 	String input = "";
@@ -16,6 +17,7 @@ public class SportsStats {
 	return input;
     }
 
+    // Returns the users' input from a query
     public static String inputer(String query) {
 	Scanner sc = new Scanner(System.in);
 	String input = "";
@@ -26,6 +28,8 @@ public class SportsStats {
 	return input;
     }
 
+    // Returns the value of a string by addition of ASCII values of
+    // each character in the string
     public static int turnToInt(String s) {
 	int stringVal = 0;
 	for (int i = 0; i < s.length(); i++) {
@@ -37,16 +41,14 @@ public class SportsStats {
     public static void main(String[] args) {
 	String[] mainOptions = {"What do you want to do? Enter a number",
 				"View All Teams",
+				"View Specific Team",
 				"Add Team",
-				"Remove Team",
 				"View Players on Team",
-				"Search For a Specific Player",
+				"Search for a Specific Player",
 				"Quit"};
-	Scanner sc = new Scanner(System.in);
 	int numTeams = 0;
-
-	Hashtable<Integer, Team> teamByName = new Hashtable<Integer, Team>(150);
-	Hashtable<Integer, Team> teamByRecord = new Hashtable<Integer, Team>(150);
+	Hashtable<String, Team> teamByName = new Hashtable<String, Team>(150);
+	Hashtable<String, Team> teamByRecord = new Hashtable<String, Team>(150);
 	
 	boolean on = true;
 	while (on) {
@@ -55,23 +57,25 @@ public class SportsStats {
 		ArrayList<Team> allTeams;
 		allTeams = teamByName.getAll();
 		for (int i = 0; i < allTeams.size(); i++) {
-		    System.out.println(allTeams.get(i).getName());
+		    Team t = allTeams.get(i);
+		    System.out.println(t.getName());
+		    System.out.println("Coach: " + t.getCoach());
+		    System.out.println("Record: " + t.getRecord());
+		    System.out.println();
 		}
 	    }
 	    if (ret.compareTo("2") == 0) {
+	    }
+	    if (ret.compareTo("3") == 0) {
 		String teamName = inputer("Team Name");
 		String coachName = inputer("Coach Name");
 		String record = inputer("Record (Please enter as \"W-L\")");
 		int indOfH = record.indexOf("-");
 		int wins = Integer.parseInt(record.substring(0,indOfH));
 		int losses = Integer.parseInt(record.substring(indOfH + 1));
-		Team t = new Team(teamName, coachName, wins, losses);
-		System.out.println(turnToInt(teamName));
-		teamByName.insertQuad(turnToInt(teamName), t);
-		System.out.println(wins);
-		System.out.println(losses);
-	    }
-	    if (ret.compareTo("3") == 0) {
+		BasketballTeam t = new BasketballTeam(teamName, coachName, wins, losses);
+		teamByName.insertQuad(teamName, t);
+		numTeams++;
 	    }
 	    if (ret.compareTo("4") == 0) {
 	    }

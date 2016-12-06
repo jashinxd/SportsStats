@@ -81,10 +81,25 @@ public class Hashtable<K, V> {
 	inArray = 0;
     }
 
+    // Returns the value of a string by addition of ASCII values of
+    // each character in the string
+    public int turnToInt(String s) {
+	int stringVal = 0;
+	for (int i = 0; i < s.length(); i++) {
+	    stringVal += (int)(s.charAt(i));
+	}
+	return stringVal;
+    }     
+
     // Insertion by separate chaining
     public void insertSepChain(K key, V value) {	 
 	Hashnode HN = new Hashnode(key, value);
-	int intKey = (Integer)key;
+	int intKey;
+	if (key.getClass() == String.class) {
+	    intKey = turnToInt((String)key);
+	} else {
+	    intKey = (Integer)key;
+	}
 	int index = intKey % sizeArray;
 	Hashnode HNatIndex = HNArray.get(index);
 	if (HNatIndex == null) {
@@ -123,7 +138,12 @@ public class Hashtable<K, V> {
 
     // Insertion by linear probing
     public void insertLinear(K key, V value) {
-	int intKey = (Integer)key;
+	int intKey;
+	if (key.getClass() == String.class) {
+	    intKey = turnToInt((String)key);
+	} else {
+	    intKey = (Integer)key;
+	}
 	int index = intKey % sizeArray;
 	for (int i = 0; keyArray.get(index) != null; i++) {
 	    index = (intKey + i) % sizeArray;
@@ -159,7 +179,12 @@ public class Hashtable<K, V> {
 
     // Insertion by quadratic probing
     public void insertQuad(K key, V value) {
-	int intKey = (Integer)key;
+	int intKey;
+	if (key.getClass() == String.class) {
+	    intKey = turnToInt((String)key);
+	} else {
+	    intKey = (Integer)key;
+	}
 	int index = intKey % sizeArray;
 	for (int i = 0; keyArray.get(index) != null; i++) {
 	    index = (intKey + i*i) % sizeArray;
@@ -185,7 +210,12 @@ public class Hashtable<K, V> {
 
     // Insertion by double hashing
     public void insertDouble(K key, V value) {
-	int intKey = (Integer)key;
+	int intKey;
+	if (key.getClass() == String.class) {
+	    intKey = turnToInt((String)key);
+	} else {
+	    intKey = (Integer)key;
+	}
 	int index = intKey % sizeArray;
 	for (int i = 0; keyArray.get(index) != null; i++) {
 	    index = (intKey + (i * (7 - (intKey % 7)))) % sizeArray;

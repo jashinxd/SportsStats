@@ -1,5 +1,6 @@
 public class Player {
-    
+
+    // Fields for basic player information
     private String firstName;
     private String lastName;
     private int birthday;
@@ -7,6 +8,7 @@ public class Player {
     private int weight;
     private int height;
 
+    // Constructor that sets the fields
     public Player(String firstName, String lastName, int birthday, int number, int weight, int height) {
 	this.firstName = firstName;
 	this.lastName = lastName;
@@ -16,6 +18,7 @@ public class Player {
 	this.height = height;
     }
 
+    // Getter and Setter methods
     public String getFirstName() {
 	return firstName;
     }

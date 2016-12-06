@@ -1,5 +1,6 @@
 public class BasketballPlayer extends Player {
 
+    // Fields for different statistics
     private int points;
     private int rebounds;
     private int assists;
@@ -7,7 +8,8 @@ public class BasketballPlayer extends Player {
     private int blocks;
     private int gamesPlayed;
 
-    public BasketballPlayer(String firstName, String lastName, int birthday, int number, int weight, int height) {
+    // Constructor. Calls the superclass' constructor then sets fields.
+    public BasketballPlayer(String firstName, String lastName, int birthday, int number, int weight, int height, int gamesPlayed) {
 	super(firstName, lastName, birthday, number, weight, height);
 	points = 0;
 	rebounds = 0;
@@ -17,6 +19,7 @@ public class BasketballPlayer extends Player {
 	gamesPlayed = 0;
     }
 
+    // Getter and Setter methods
     public int getPoints() {
 	return points;
     }
@@ -37,6 +40,14 @@ public class BasketballPlayer extends Player {
 	return assists;
     }
 
+    public void setAssists(int assists) {
+	this.assists = assists;
+    }
+
+    public int getSteals() {
+	return steals;
+    }
+    
     public void setSteals(int steals) {
 	this.steals = steals;
     }
@@ -47,7 +58,13 @@ public class BasketballPlayer extends Player {
 
     public void setBlocks(int blocks) {
 	this.blocks = blocks;
-    }  
+    }
 
-    
+    public int getGamesPlayed() {
+	return gamesPlayed;
+    }
+
+    public void setGamesPlayed(int gamesPlayed) {
+	this.gamesPlayed = gamesPlayed;
+    }
 }
