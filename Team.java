@@ -30,6 +30,6 @@ public class Team {
     }
 
     public Collection<Player> getAllPlayers() {
-	return  byName.values();
+	return byName.values();
     }
 }

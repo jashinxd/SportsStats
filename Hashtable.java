@@ -42,7 +42,8 @@ public class Hashtable<K, V> {
 	valueArray = new ArrayList<V>(20);
 	HNArray = new ArrayList<Hashnode>(20);
 	sizeArray = 20;
-	loadFactor = 0.75;
+	inArray = 0;
+	//loadFactor = 0.75;
 	clear();
     }
 
@@ -51,7 +52,8 @@ public class Hashtable<K, V> {
 	valueArray = new ArrayList<V>(size);
 	HNArray = new ArrayList<Hashnode>(size);
 	sizeArray = size;
-	loadFactor = 0.75;
+	inArray = 0;
+	//loadFactor = 0.75;
 	clear();
     }
 
@@ -64,7 +66,7 @@ public class Hashtable<K, V> {
 	inArray = 0;
     }
 
-    public void insertSepChain(K key, V value) {
+    public void insertSepChain(K key, V value) {	 
 	Hashnode HN = new Hashnode(key, value);
 	int intKey = (Integer)key;
 	int index = intKey % sizeArray;
@@ -77,6 +79,13 @@ public class Hashtable<K, V> {
 		HNatIndex = HNatIndex.getNext();
 	    }
 	    HNatIndex.setNext(HN);
+	}
+	/*
+	if ((float)inArray / (float)sizeArray >= loadFactor) {
+	    ArrayList<Hashnode> tmp = new ArrayList<Hashnode>(size*2);
+	    HNArray.addAll(0, tmp);
+	    HNArray = tmp;
+	*/
 	}
     }
 
@@ -104,6 +113,16 @@ public class Hashtable<K, V> {
 	keyArray.set(index, key);
 	valueArray.set(index, value);
 	inArray++;
+	/*
+	if ((float)inArray / (float)sizeArray >= loadFactor) {
+	    ArrayList<K> tmpKey = new ArrayList<K>(size*2);
+	    ArrayList<V> tmpVal = new ArrayList<V>(size*2);
+	    keyArray.addAll(0, tmpKey);
+	    valueArray.addAll(0, tmpVal);
+	    keyArray = tmpKey;
+	    valueArray = tmpVal;
+	}
+	*/
     }
 
     public ArrayList<V> getLinear(K key) {
