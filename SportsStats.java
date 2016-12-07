@@ -43,7 +43,7 @@ public class SportsStats {
 				"View All Teams",
 				"View Specific Team",
 				"Add Team",
-				"View Players on Team",
+				"Add/View Players on Team",
 				"Search for a Specific Player",
 				"Quit"};
 	int numTeams = 0;
