@@ -3,13 +3,13 @@ public class Player {
     // Fields for basic player information
     private String firstName;
     private String lastName;
-    private int birthday;
+    private String birthday;
     private int number;
     private int weight;
     private int height;
 
     // Constructor that sets the fields
-    public Player(String firstName, String lastName, int birthday, int number, int weight, int height) {
+    public Player(String firstName, String lastName, String birthday, int number, int weight, int height) {
 	this.firstName = firstName;
 	this.lastName = lastName;
 	this.birthday = birthday;
@@ -35,11 +35,11 @@ public class Player {
 	this.lastName = lastName;
     }
 
-    public int getBirthday() {
+    public String getBirthday() {
 	return birthday;
     }
 
-    public void setBirthday(int birthday) {
+    public void setBirthday(String birthday) {
 	this.birthday = birthday;
     }
 

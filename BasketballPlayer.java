@@ -9,7 +9,7 @@ public class BasketballPlayer extends Player {
     private int gamesPlayed;
 
     // Constructor. Calls the superclass' constructor then sets fields.
-    public BasketballPlayer(String firstName, String lastName, int birthday, int number, int weight, int height) {
+    public BasketballPlayer(String firstName, String lastName, String birthday, int number, int weight, int height) {
 	super(firstName, lastName, birthday, number, weight, height);
 	points = 0;
 	rebounds = 0;

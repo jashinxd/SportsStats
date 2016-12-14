@@ -44,7 +44,6 @@ public class SportsStats {
 				"View Specific Team",
 				"Add Team",
 				"Add/View Players on Team",
-				"Search for a Specific Player",
 				"Quit"};
 	int numTeams = 0;
 	Hashtable<String, Team> teamByName = new Hashtable<String, Team>(150);
@@ -65,6 +64,17 @@ public class SportsStats {
 		}
 	    }
 	    if (ret.compareTo("2") == 0) {
+		ArrayList<Team> tArray;
+		Team t;
+		int numPlayers;
+		String teamName = inputer("Enter team name");
+		tArray = teamByName.getQuad(teamName);
+		t = tArray.get(0);
+		numPlayers = t.getHTFullName().getInArray();
+		System.out.println(t.getName());
+		System.out.println("Coach: " + t.getCoach());
+		System.out.println("Record: " + t.getRecord());
+		System.out.println("Number of Players: " + numPlayers);
 	    }
 	    if (ret.compareTo("3") == 0) {
 		String teamName = inputer("Team Name");
@@ -78,10 +88,61 @@ public class SportsStats {
 		numTeams++;
 	    }
 	    if (ret.compareTo("4") == 0) {
+		String addP = "y";
+		ArrayList<Team> tArray;
+		Team t;
+		ArrayList<Player> pArray;
+		Player p;
+		String pFirstName;
+		String pLastName;
+		int pNumber;
+		String pBirthday;
+		int pHeight;
+		int pFeet;
+		int pInches;
+		String pHeightS;
+		int pWeight;
+		String teamName = inputer("Enter team name");
+		tArray = teamByName.getQuad(teamName);
+		t = tArray.get(0);
+		pArray = t.getAllPlayers();
+		while (addP.compareTo("y") == 0) {
+		    System.out.println(t.getName());
+		    for (int i = 0; i < pArray.size(); i++) {
+			p = pArray.get(i);
+			pFirstName = p.getFirstName();
+			pLastName = p.getLastName();
+			pNumber = p.getNumber();
+			pBirthday = p.getBirthday();
+			pHeight = p.getHeight();
+			pFeet = pHeight / 12;
+			pInches = pHeight - (pFeet * 12);
+			pHeightS = pFeet + "'" + pInches + "\"";
+			pWeight = p.getWeight();
+			System.out.println(i+". "+pFirstName + " " + pLastName + " -- " + "Number: " + pNumber + ", Birthday: " + pBirthday + ", Height: " + pHeightS + ", Weight: " +  pWeight);
+		    }
+		
+		    addP = inputer("Would you like to add a player? (y/n)");
+		    if (addP.compareTo("y") == 0) {
+			Player newP;
+			String newPFirstName = inputer("First Name");
+			String newPLastName = inputer("Last Name");
+			String newPBirthday = inputer("Birthday (MM/DD/YYYY)");
+			int newPNumber = Integer.parseInt(inputer("Number"));
+			String newPHeight = inputer("Height (X'Y\")");
+			int indOfA = newPHeight.indexOf("'");
+			int indOfQ = newPHeight.indexOf("\"");
+			int feet = Integer.parseInt(newPHeight.substring(0, indOfA));
+			int inches = Integer.parseInt(newPHeight.substring(indOfA + 1, indOfQ));
+			inches += feet * 12;
+			int newPHeightInt = inches;
+			int newPWeight = Integer.parseInt(inputer("Weight (in pounds, no units)"));
+			newP = new Player(newPFirstName, newPLastName, newPBirthday, newPNumber, newPWeight, newPHeightInt);
+			teamByName.getQuad(teamName).get(0).addPlayer(newP);
+		    }
+		}
 	    }
 	    if (ret.compareTo("5") == 0) {
-	    }
-	    if (ret.compareTo("6") == 0) {
 		on = false;
 	    }
 	}

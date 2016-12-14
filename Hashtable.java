@@ -196,11 +196,16 @@ public class Hashtable<K, V> {
 
     // Retrieval by quadratic probing
     public ArrayList<V> getQuad(K key) {
+	int intKey;
+	if (key.getClass() == String.class) {
+	    intKey = turnToInt((String)key);
+	} else {
+	    intKey = (Integer)key;
+	}
 	ArrayList<V> ret = new ArrayList<V>();
-	int intKey = (Integer)key;
 	int index = intKey % sizeArray;
 	for (int i = 0; keyArray.get(index) != null; i++) {
-	    if (keyArray.get(index) == key) {
+	    if (turnToInt((String)keyArray.get(index)) == intKey) {
 		ret.add(valueArray.get(index));
 		index = (intKey + i*i) % sizeArray;
 	    }
@@ -248,5 +253,9 @@ public class Hashtable<K, V> {
 	    }
 	}
 	return ret;
+    }
+
+    public int getInArray() {
+	return inArray;
     }
 }
